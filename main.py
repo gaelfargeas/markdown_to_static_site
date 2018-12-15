@@ -29,7 +29,8 @@ if __name__ == "__main__":
                     print("intput file :", input_file.name)
 
                     with open(
-                        "html/"
+                        str(args.o)
+                        + "/"
                         + input_file.name.split("\\")[1].split(".")[0]
                         + ".html",
                         "w",
