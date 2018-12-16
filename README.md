@@ -4,8 +4,8 @@ convert markdown static site
 
 check before generate:
 
-make sure there aren't any space or point in input/output path and filename( file : name.md not name.somethink.md)
-
+make sure there aren't any space or point in input/output path and file name( file : name.md not name.somethink.md)
+make sure there aren't any "/" or "\" in file name
 
 project from :
 https://github.com/vpoulailleau/site_statique
