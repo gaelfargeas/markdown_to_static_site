@@ -23,19 +23,20 @@ if __name__ == "__main__":
 
         with Path(args.i) as directory:
             for file in list(directory.glob("*.md")):
-                print(file)
 
                 with open(file, "r") as input_file:
-                    print("intput file :", input_file.name)
+                    if VERBOSE:
+                        print("intput file :", input_file.name)
 
+                    file_name = (
+                        input_file.name.split(".")[0].split("/")[-1].split("\\")[-1]
+                    )
                     with open(
-                        str(args.o)
-                        + "/"
-                        + input_file.name.split("\\")[1].split(".")[0]
-                        + ".html",
-                        "w",
+                        str(args.o) + "/" + str(file_name) + ".html", "w"
                     ) as output_file:
 
-                        print("output file :", output_file.name)
+                        if VERBOSE:
+                            print("output file :", output_file.name)
+
                         output_file.write(markdown2.markdown(input_file.read()))
 
