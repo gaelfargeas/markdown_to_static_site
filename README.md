@@ -4,7 +4,7 @@ convert markdown static site
 
 ## prerequis :
 
-Python <+ 3
+Python3+
 
 ## how to use :
 
