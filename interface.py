@@ -13,6 +13,7 @@ class interface:
         self.output_directory = tkinter.StringVar(value="./html/")
         self.template_directory = tkinter.StringVar(value="./template/")
         self.use_template = tkinter.BooleanVar(value=False)
+        self.type_input = tkinter.BooleanVar(value=False)
         self.make_interface()
 
     def make_interface(self):
@@ -83,18 +84,39 @@ class interface:
         bouton_exit = tkinter.Button(Frame_bp, text="Exit", command=self.fenetre.quit)
         bouton_exit.pack(fill="both", expand=True, side=tkinter.constants.RIGHT)
 
+        Frame_opt = tkinter.Frame(main, borderwidth=2)
+        Frame_opt.pack(fill="both", expand=True, side=tkinter.constants.BOTTOM)
+
         chkbp_use_template = tkinter.Checkbutton(
-            Frame_bp, text="use template  ?", variable=self.use_template
+            Frame_opt, text="use template  ?", variable=self.use_template
         )
         chkbp_use_template.pack(fill="both", expand=True, side=tkinter.constants.BOTTOM)
+
+        chkbp_type_input = tkinter.Checkbutton(
+            Frame_opt, text="input is a folder ?", variable=self.type_input
+        )
+        chkbp_type_input.pack(fill="both", expand=True, side=tkinter.constants.BOTTOM)
 
         self.fenetre.mainloop()
 
     def directory_ask(self, ID=""):
         if ID == "input":
-            self.input_directory.set(
-                tkinter_fl.askdirectory(title="selectioné un dossier")
-            )
+            print(self.type_input.get())
+            if self.type_input.get():
+                self.input_directory.set(
+                    tkinter_fl.askdirectory(title="selectioné un dossier")
+                )
+            else:
+                self.input_directory.set(
+                    tkinter_fl.askopenfile(
+                        mode="r",
+                        title="selectioné un fichier",
+                        filetypes=(
+                            ("markdown files", "*main.md"),
+                            ("all files", "*.*"),
+                        ),
+                    ).name
+                )
 
         elif ID == "output":
             self.output_directory.set(
@@ -104,7 +126,7 @@ class interface:
             self.template_directory.set(
                 tkinter_fl.askopenfile(
                     mode="r",
-                    title="selectioné un dossier",
+                    title="selectioné un fichier",
                     filetypes=(("html files", "*.html"), ("all files", "*.*")),
                 ).name
             )
@@ -118,15 +140,19 @@ class interface:
         if self.use_template.get():
             if VERBOSE:
                 print("Generate with template")
-            os.system(
-                f"python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()} -t {self.template_directory.get()}"
-            )
+                command = f"python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()} -t {self.template_directory.get()}"
+                if self.type_input.get():
+                    command += "-s"
+
+            os.system(command)
         else:
             if VERBOSE:
                 print("Generate without template")
-            os.system(
-                f"python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()}"
-            )
+            command = f" python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()}"
+            if self.type_input.get():
+                command += "-s"
+
+            os.system(command)
 
 
 interf = interface()
