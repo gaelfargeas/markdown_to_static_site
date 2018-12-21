@@ -1,6 +1,7 @@
 import argparse
 from pathlib import Path
 import markdown2
+import jinja2
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", help="Chemin du dossier des fichiers source.", type=str)
@@ -37,6 +38,18 @@ if __name__ == "__main__":
 
                         if VERBOSE:
                             print("output file :", output_file.name)
+                        html = markdown2.markdown(input_file.read())
 
-                        output_file.write(markdown2.markdown(input_file.read()))
+                        if args.t != None:
+                            with open(args.t) as template_file:
+                                resutl = jinja2.Template(template_file.read()).render(
+                                    content=html
+                                )
+                        else:
+                            resutl = html
+
+                        if VERBOSE:
+                            print("template file :", args.t)
+
+                        output_file.write(resutl)
 
