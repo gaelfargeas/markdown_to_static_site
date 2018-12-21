@@ -41,7 +41,6 @@ if __name__ == "__main__":
                             .split("\\")[-1]
                             .split("_main")[0]
                         )
-                        print("file name :", file_name)
                         with open(
                             str(args.o) + "/" + str(file_name) + ".html", "w"
                         ) as output_file:
@@ -64,7 +63,6 @@ if __name__ == "__main__":
                                         .lower()
                                     )
                                     if config_name != "main":
-                                        print("config name :", config_name)
                                         with open(config_file, "r") as open_config_file:
                                             config_dict[
                                                 config_name

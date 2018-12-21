@@ -2,6 +2,10 @@
 
 convert markdown static site
 
+## bug :
+
+code only work on windows because python3 is call by python in the command line interface.
+
 ## prerequis :
 
 Python +> 3.6

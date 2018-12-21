@@ -101,7 +101,6 @@ class interface:
 
     def directory_ask(self, ID=""):
         if ID == "input":
-            print(self.type_input.get())
             if self.type_input.get():
                 self.input_directory.set(
                     tkinter_fl.askdirectory(title="selectioné un dossier")
@@ -140,17 +139,20 @@ class interface:
         if self.use_template.get():
             if VERBOSE:
                 print("Generate with template")
-                command = f"python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()} -t {self.template_directory.get()}"
-                if self.type_input.get():
-                    command += "-s"
+
+            command = f"python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()} -t {self.template_directory.get()}"
+            if self.type_input.get():
+                command += " -s"
 
             os.system(command)
+
         else:
             if VERBOSE:
                 print("Generate without template")
+
             command = f" python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()}"
             if self.type_input.get():
-                command += "-s"
+                command += " -s"
 
             os.system(command)
 
