@@ -4,12 +4,14 @@ convert markdown static site
 
 ## prerequis :
 
-Python3+
+Python +> 3.6
 
 ## how to use :
 
 git clone https://github.com/gaelfargeas/markdown_to_static_site.git
+
 cd markdown_to_static_site
+
 python3 interface.py
 
 ## check before generate:
