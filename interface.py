@@ -1,8 +1,14 @@
 import tkinter
 import tkinter.filedialog as tkinter_fl
 import os
+import platform
 
 VERBOSE = True
+
+if platform.system() == "Linux":
+    python = "python3"
+else:
+    python = "python"
 
 
 class interface:
@@ -140,7 +146,7 @@ class interface:
             if VERBOSE:
                 print("Generate with template")
 
-            command = f"python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()} -t {self.template_directory.get()}"
+            command = f"{python} ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()} -t {self.template_directory.get()}"
             if self.type_input.get():
                 command += " -s"
 
@@ -150,7 +156,7 @@ class interface:
             if VERBOSE:
                 print("Generate without template")
 
-            command = f" python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()}"
+            command = f" {python} ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()}"
             if self.type_input.get():
                 command += " -s"
 
