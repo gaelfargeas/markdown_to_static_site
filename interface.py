@@ -2,6 +2,8 @@ import tkinter
 import tkinter.filedialog as tkinter_fl
 import os
 
+VERBOSE = True
+
 
 class interface:
     def __init__(self):
@@ -9,57 +11,82 @@ class interface:
         self.fenetre = tkinter.Tk()
         self.input_directory = tkinter.StringVar(value="./markdown/")
         self.output_directory = tkinter.StringVar(value="./html/")
+        self.template_directory = tkinter.StringVar(value="./template/")
+        self.use_template = tkinter.BooleanVar(value=False)
         self.make_interface()
 
     def make_interface(self):
         main = tkinter.LabelFrame(
-            self.fenetre, text="convert markdown to a static site", padx=20, pady=20
+            self.fenetre, text="convert markdown to a static site", padx=50, pady=50
         )
         main.pack(fill="both", expand="yes")
 
         Frame_data = tkinter.Frame(
             main, borderwidth=10, relief=tkinter.constants.GROOVE
         )
-        Frame_data.pack(padx=5, pady=5, side=tkinter.constants.TOP)
+        Frame_data.pack(fill="both", expand=True, side=tkinter.constants.TOP)
 
         Frame_input = tkinter.Frame(Frame_data, borderwidth=10)
-        Frame_input.pack(padx=5, pady=5, side=tkinter.constants.LEFT)
+        Frame_input.pack(fill="both", expand=True)
 
         lb_input = tkinter.Label(Frame_input, text="input setting")
-        lb_input.pack()
+        lb_input.pack(fill="both", expand=True)
 
         tf_input = tkinter.Entry(Frame_input, textvariable=self.input_directory)
-        tf_input.pack()
+        tf_input.pack(fill="both", expand=True, side=tkinter.constants.LEFT)
 
         bouton_input = tkinter.Button(
             Frame_input, text="select", command=lambda: self.directory_ask(ID="input")
         )
-        bouton_input.pack(side=tkinter.constants.LEFT)
+        bouton_input.pack(side=tkinter.constants.RIGHT)
 
         Frame_output = tkinter.Frame(Frame_data, borderwidth=10)
-        Frame_output.pack(padx=5, pady=5, side=tkinter.constants.RIGHT)
+        Frame_output.pack(fill="both", expand=True)
 
         lb_output = tkinter.Label(Frame_output, text="output setting")
-        lb_output.pack()
+        lb_output.pack(fill="both", expand=True)
 
         tf_output = tkinter.Entry(Frame_output, textvariable=self.output_directory)
-        tf_output.pack()
+        tf_output.pack(fill="both", expand=True, side=tkinter.constants.LEFT)
 
         bouton_output = tkinter.Button(
             Frame_output, text="select", command=lambda: self.directory_ask(ID="output")
         )
-        bouton_output.pack(side=tkinter.constants.LEFT)
+        bouton_output.pack(side=tkinter.constants.RIGHT)
+
+        Frame_template = tkinter.Frame(Frame_data, borderwidth=10)
+        Frame_template.pack(fill="both", expand=True)
+
+        lb_template = tkinter.Label(Frame_template, text="template setting")
+        lb_template.pack(fill="both", expand=True)
+
+        tf_template = tkinter.Entry(
+            Frame_template, textvariable=self.template_directory
+        )
+        tf_template.pack(fill="both", expand=True, side=tkinter.constants.LEFT)
+
+        bouton_template = tkinter.Button(
+            Frame_template,
+            text="select",
+            command=lambda: self.directory_ask(ID="template"),
+        )
+        bouton_template.pack(side=tkinter.constants.RIGHT)
 
         Frame_bp = tkinter.Frame(main, borderwidth=2)
-        Frame_bp.pack(padx=5, pady=5, side=tkinter.constants.BOTTOM)
+        Frame_bp.pack(fill="both", expand=True, side=tkinter.constants.BOTTOM)
 
         bouton_generate = tkinter.Button(
             Frame_bp, text="generate", command=lambda: self.generate()
         )
-        bouton_generate.pack(side=tkinter.constants.LEFT)
+        bouton_generate.pack(fill="both", expand=True, side=tkinter.constants.LEFT)
 
         bouton_exit = tkinter.Button(Frame_bp, text="Exit", command=self.fenetre.quit)
-        bouton_exit.pack(side=tkinter.constants.RIGHT)
+        bouton_exit.pack(fill="both", expand=True, side=tkinter.constants.RIGHT)
+
+        chkbp_use_template = tkinter.Checkbutton(
+            Frame_bp, text="use template  ?", variable=self.use_template
+        )
+        chkbp_use_template.pack(fill="both", expand=True, side=tkinter.constants.BOTTOM)
 
         self.fenetre.mainloop()
 
@@ -73,14 +100,33 @@ class interface:
             self.output_directory.set(
                 tkinter_fl.askdirectory(title="selectioné un dossier")
             )
+        elif ID == "template":
+            self.template_directory.set(
+                tkinter_fl.askopenfile(
+                    mode="r",
+                    title="selectioné un dossier",
+                    filetypes=(("html files", "*.html"), ("all files", "*.*")),
+                ).name
+            )
 
-        print("input", self.input_directory.get())
-        print("output", self.output_directory.get())
+        if VERBOSE:
+            print("input", self.input_directory.get())
+            print("output", self.output_directory.get())
+            print("template", self.template_directory.get())
 
     def generate(self):
-        os.system(
-            f"python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()} "
-        )
+        if self.use_template.get():
+            if VERBOSE:
+                print("Generate with template")
+            os.system(
+                f"python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()} -t {self.template_directory.get()}"
+            )
+        else:
+            if VERBOSE:
+                print("Generate without template")
+            os.system(
+                f"python ./main.py -v -i {self.input_directory.get()}  -o {self.output_directory.get()}"
+            )
 
 
 interf = interface()
