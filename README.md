@@ -14,6 +14,19 @@ cd markdown_to_static_site
 
 python3 interface.py
 
+## WARNING :
+
+template isn't fully implemented and may dont work.
+
+curently, convert 1 markdown file into 1 html file. 
+is template is used : the whole markdown file is use as "content" in template.
+
+in template use :
+
+    <div class="container">
+    {{content}}
+    </div>
+
 ## check before generate:
 
 make sure there aren't any space or point in input/output path and file name( file : name.md not name.somethink.md)
