@@ -18,14 +18,25 @@ python3 interface.py
 
 template isn't fully implemented and may dont work.
 
-curently, convert 1 markdown file into 1 html file. 
-is template is used : the whole markdown file is use as "content" in template.
+## format :
 
-in template use :
+your main file : name_main.md
 
-    <div class="container">
-    {{content}}
-    </div>
+### template :
+
+in template you can call variables by :
+
+    {{variable}}
+
+#### example :
+
+for your main file (name_main.md) the variable is is "main" :
+
+    {{main}}
+
+for your x file (name_x.md) the variable is is "x" :
+
+    {{x}}    
 
 ## check before generate:
 
