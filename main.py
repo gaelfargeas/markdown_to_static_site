@@ -35,7 +35,7 @@ def add_image(html_test):
 
     # get le path du dossier input
     if args.s:
-        input_path = os.path(args.i)
+        input_path = os.fspath(args.i)
     else:
         input_path = os.path.dirname(args.i)
 
@@ -128,6 +128,7 @@ if __name__ == "__main__":
                             if VERBOSE:
                                 print("template file :", args.t)
 
+                            resutl = add_image(resutl)
                             output_file.write(resutl)
 
     else:
