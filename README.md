@@ -8,9 +8,17 @@ Python +> 3.6
 
 install markdown2 and jinja2 :
 
-    pip install markdown2
+windows :
 
-    pip install jinja2
+    python -m pip install markdown2
+
+    python -m pip install jinja2
+
+linux
+
+    pip3 install markdown2
+
+    pip3 install jinja2
 
 ## how to use :
 
