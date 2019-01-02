@@ -6,6 +6,12 @@ convert markdown static site
 
 Python +> 3.6
 
+install markdown2 and jinja2 :
+
+    pip install markdown2
+
+    pip install jinja2
+
 ## how to use :
 
 git clone https://github.com/gaelfargeas/markdown_to_static_site.git
