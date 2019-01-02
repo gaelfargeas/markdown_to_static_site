@@ -1,12 +1,12 @@
-# markdown_to_static_site
+# Markdown_to_static_site
 
-convert markdown static site
+convert markdown to a static site
 
-## prerequis :
+## Prerequis :
 
 Python +> 3.6
 
-install markdown2 and jinja2 :
+Install markdown2 and jinja2 :
 
 windows :
 
@@ -20,47 +20,58 @@ linux
 
     pip3 install jinja2
 
-## how to use :
+## How to use :
 
-git clone https://github.com/gaelfargeas/markdown_to_static_site.git
+    git clone https://github.com/gaelfargeas/markdown_to_static_site.git
 
-cd markdown_to_static_site
+    cd markdown_to_static_site
 
-python3 interface.py
+    python3 interface.py
 
 ## WARNING :
 
-template isn't fully implemented and may dont work.
+Template isn't fully implemented and may dont work.
 
-## format :
+Do not use two different images with the same name.
 
-your main file : name_main.md
+example :
 
-### template :
+    dir_a/test.png
 
-in template you can call variables by :
+and 
+
+    dir_b/test.png
+
+## Format :
+
+Your main file : name_main.md
+
+### Template :
+
+In template you can call variables by :
 
     {{variable}}
 
-#### example :
+#### Example :
 
-for your main file (name_main.md) the variable is is "main" :
+For your main file (name_main.md) the variable is is "main" :
 
     {{main}}
 
-for your x file (name_x.md) the variable is is "x" :
+For your x file (name_x.md) the variable is is "x" :
 
     {{x}}    
 
-## check before generate:
+## Check before generate:
 
-make sure there aren't any space or point in input/output path and file name( file : name.md not name.somethink.md)
-make sure there aren't any "/" or "\\" in file name
+Make sure there aren't any space or point in input/output path and file name( file : name.md not name.somethink.md)
+Make sure there aren't any "/" or "\\" in file name
 
-project from :
+Project from :
 https://github.com/vpoulailleau/site_statique
 
 
-library used :
+Library used :
 
-markdown2 ( https://github.com/trentm/python-markdown2 , license MIT)
+Markdown2 (https://github.com/trentm/python-markdown2 , license MIT)
+jinja2 (https://github.com/pallets/jinja/tree/master/jinja2)
