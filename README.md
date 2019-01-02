@@ -74,4 +74,5 @@ https://github.com/vpoulailleau/site_statique
 Library used :
 
 Markdown2 (https://github.com/trentm/python-markdown2 , license MIT)
+
 jinja2 (https://github.com/pallets/jinja/tree/master/jinja2)
