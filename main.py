@@ -28,24 +28,20 @@ if VERBOSE:
 
 
 def add_image(html_test):
-    # dans le output file crée un dossier src
     src_path = Path(args.o + "/src")
     if not os.path.exists(src_path):
         os.makedirs(src_path)
 
-    # get le path du dossier input
     if args.s:
         input_path = os.fspath(args.i)
     else:
         input_path = os.path.dirname(args.i)
 
-    # parse le html , cp chaque image dans scr et modif le link
     result_string = ""
     for line in html_test.split("\n"):
 
         line = str(line)
         if "<img " in line:
-            # get image
             image_path = line.split('src="')[1].split('" ')[0]
             if VERBOSE:
                 print("image_path", image_path)
